@@ -1,0 +1,52 @@
+program := data_decls block_statements
+
+data_decls := type_name var semicolon | type_struct var semicolon | lambda
+
+type_name := int | string
+
+type_struct := node type_name | edge type_name
+
+var := ID | ID left_bracket expression right_bracket
+
+list := left_bracket data_list right_bracket
+data_list := expression | expression comma data_list | lambda
+
+block_statements := left_brace statements right_brace
+
+statements := statement statements | lambda
+
+statement := assignment 
+statement := if_statement
+statement := while_statement
+statement := break_statement
+statement := continue_statement
+statement := read left_parenthesis ID right_parenthesis semicolon
+statement := print left_parenthesis ID right_parenthesis semicolon
+
+assignment := var equal expression semicolon 
+
+assign_edge := var double_less var double_great var semicolon
+access_node_from_edge := left var | right var
+access_edges := var in var semicolon
+
+if_statement := if left_parenthesis condition_expression right_parenthesis block_statements
+condition_expression := expression comparison_op expression
+comparison_op := == | != | < | > | <= | >=
+
+while_statement := while left_parenthesis condition_expression right_parenthesis block_statements
+break_statement := break semicolon
+continue_statement := continue semicolon
+
+for_statement := for ID in list block_statements
+
+expression := term | expression_p
+expression_p := add_oper term expression_p
+expression_p := min_oper term expression_p
+expression_p := lambda
+
+term := factor term_p
+term_p := mul_oper factor term_p
+term_p := div_oper factor term_p
+term_p := lambda
+
+factor := ID | NUMBER | left_parenthesis expression right_parenthesis
