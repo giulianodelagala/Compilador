@@ -1,0 +1,13 @@
+int a
+int b
+int c
+node N
+node M
+edge S
+{b=(100005+3)
+a=2
+M=3
+c = (10 + 5)
+N -> S
+M -> S
+}
